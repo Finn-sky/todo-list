@@ -74,6 +74,77 @@
       "font_class": "unlock",
       "unicode": "e682",
       "unicode_decimal": 59010
+    },
+    {
+      "icon_id": "15838547",
+      "name": "edit",
+      "font_class": "edit",
+      "unicode": "e672",
+      "unicode_decimal": 59011
+    },
+    
+    {
+      "icon_id": "44596371",
+      "name": "减少",
+      "font_class": "jianshao",
+      "unicode": "1020b",
+      "unicode_decimal": 66059
+    },
+    {
+      "icon_id": "44596372",
+      "name": "不可见",
+      "font_class": "bukejian",
+      "unicode": "1020c",
+      "unicode_decimal": 66060
+    },
+    {
+      "icon_id": "44596373",
+      "name": "历史记录",
+      "font_class": "lishijilu",
+      "unicode": "1020d",
+      "unicode_decimal": 66061
+    },
+    {
+      "icon_id": "44596374",
+      "name": "点击",
+      "font_class": "dianji",
+      "unicode": "1020e",
+      "unicode_decimal": 66062
+    },
+    {
+      "icon_id": "44596376",
+      "name": "备注",
+      "font_class": "beizhu",
+      "unicode": "1020f",
+      "unicode_decimal": 66063
+    },
+    {
+      "icon_id": "44596380",
+      "name": "更多",
+      "font_class": "gengduo",
+      "unicode": "10210",
+      "unicode_decimal": 66064
+    },
+    {
+      "icon_id": "44596382",
+      "name": "列表",
+      "font_class": "liebiao",
+      "unicode": "10211",
+      "unicode_decimal": 66065
+    },
+    {
+      "icon_id": "44596383",
+      "name": "编辑",
+      "font_class": "bianji",
+      "unicode": "10212",
+      "unicode_decimal": 66066
+    },
+    {
+      "icon_id": "44596385",
+      "name": "撤销",
+      "font_class": "chexiao",
+      "unicode": "10213",
+      "unicode_decimal": 66067
     }
   ]
 }

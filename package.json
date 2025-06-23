@@ -1,6 +1,6 @@
 {
   "name": "xhznl-todo-list",
-  "version": "0.2.3",
+  "version": "0.2.5",
   "private": true,
   "author": "xhznl",
   "description": "a todo list application",
@@ -18,7 +18,7 @@
     "core-js": "^3.6.5",
     "dayjs": "^1.9.6",
     "electron-builder": "^22.10.5",
-    "electron-updater": "^4.3.5",
+    "electron-updater": "4.3.5",
     "electron-window-state": "^5.0.3",
     "exceljs": "^4.2.0",
     "fs-extra": "^9.0.1",

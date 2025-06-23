@@ -62,7 +62,17 @@ const DB = {
           id: "272aa857-bd53-44fb-b6fc-49d4ef595ade",
         },
       ],
-      settings: {},
+      settings: {
+      },
+      setting:{
+        bgopacity:0.8,
+        opacity:1,
+      },
+      title:{
+        title:"TodoList",
+        subtitle:"一个一个来！",
+      
+      }
     }).write();
 
     if (!this.has("settings.firstRun")) {
@@ -76,10 +86,11 @@ const DB = {
       .value();
   },
   get(key) {
-    return db
+    const d = db
       .read()
       .get(key)
       .value();
+    return d;
   },
   set(key, value) {
     return db
@@ -110,7 +121,7 @@ const DB = {
       .groupBy(prop)
       .value();
     return d;
-  },
+  }
 };
 
 export default DB;

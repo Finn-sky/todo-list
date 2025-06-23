@@ -45,6 +45,7 @@ async function createWindow() {
     y: mainWindowState.y,
     width: mainWindowState.width,
     height: mainWindowState.height,
+    backgroundColor:"#00000000",
     minWidth: 320,
     minHeight: 290,
     type: "toolbar",
@@ -62,7 +63,9 @@ async function createWindow() {
     webPreferences: {
       // Use pluginOptions.nodeIntegration, leave this alone
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
-      nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION
+      nodeIntegration: process.env.ELECTRON_NODE_INTEGRATION,
+      backgroundThrottling: false,
+      disableHtmlFullscreenWindowResize: true
     }
   });
 
@@ -183,4 +186,17 @@ ipcMain.handle("setIgnoreMouseEvents", (event, ignore) => {
 
 ipcMain.handle("hideWindow", event => {
   win.hide();
+});
+
+// 添加透明度设置的 IPC 监听
+ipcMain.handle('set-window-opacity', async (event, opacity) => {
+  if (win && !win.isDestroyed()) {
+    win.setOpacity(opacity);
+    win.setIgnoreMouseEvents(false);
+    return true; // 返回确认
+  }
+  return false;
+});
+ipcMain.handle('get-window-opacity', () => {
+  return win ? win.getOpacity() : 1;
 });

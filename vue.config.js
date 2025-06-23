@@ -11,9 +11,9 @@ module.exports = {
           buildResources: "./public",
           // output: "./dist", //输出文件路径
         },
-        electronDownload: {
-          mirror: "https://npm.taobao.org/mirrors/electron/",
-        },
+        // electronDownload: {
+          // mirror: "http://vpc-yjyhzbd048.hikvision.com/mirrors/electron/",
+        // },
         win: {
           icon: "./public/logo.ico",
           target: [
@@ -54,7 +54,7 @@ module.exports = {
             arch: "universal",
           },
         },
-        publish: ["github"],
+        // publish: ["github"],
         // releaseInfo: {
         //   releaseName: "",
         //   releaseNotes: "",

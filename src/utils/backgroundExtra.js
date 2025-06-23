@@ -5,7 +5,8 @@ import {
   Menu,
   shell,
   dialog,
-  Notification
+  Notification,
+  ipcRenderer
 } from "electron";
 import DB from "./db";
 import path from "path";
@@ -53,20 +54,6 @@ export function createTray(showWindow) {
       click() {
         const openAtLogin = getOpenAtLogin();
         setOpenAtLogin(!openAtLogin);
-      }
-    },
-    {
-      label: "项目地址",
-      click: () => {
-        shell.openExternal("https://github.com/xiajingren/xhznl-todo-list");
-      }
-    },
-    {
-      label: "问题反馈",
-      click: () => {
-        shell.openExternal(
-          "https://github.com/xiajingren/xhznl-todo-list/issues"
-        );
       }
     },
     {
