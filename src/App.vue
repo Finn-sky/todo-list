@@ -15,8 +15,7 @@
             <transition-group name="fade" mode="out-in">
             <i class="iconfont icon-export" key="export" @click="exportData"></i>
             <i class="iconfont icon-eye-close" key="hide" @click="hideWindow"></i>
-            <i
-            :class="['iconfont', ignoreMouse ? 'icon-lock' : 'icon-unlock']"
+            <i :class="['iconfont', ignoreMouse ? 'icon-lock' : 'icon-unlock']"
             key="lock"
             @mouseenter="setIgnoreMouseEvents(false)"
             @mouseleave="setIgnoreMouseEvents(ignoreMouse)"
@@ -62,7 +61,7 @@ export default {
       this.bgopacity = DB.get("setting").bgopacity
       this.opacity = DB.get("setting").opacity
       console.log(this.bgopacity,this.opacity)
-      this.handleOpacityUpdate("bg", this.opacity);
+      this.handleOpacityUpdate("bg", this.bgopacity);
       this.handleOpacityUpdate("body", this.opacity);
     },
     setIgnoreMouseEvents(ignore) {

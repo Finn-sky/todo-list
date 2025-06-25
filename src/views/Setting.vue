@@ -10,29 +10,18 @@
     </div>
     <div class="input-group">
       <label class="input-label">BgOpacity</label>
-      <input
-        type="number"
-        class="input-field"
-        @change="handleBgOpacityChange"
-        placeholder="请输入透明度(0-1)" 
-        v-model="bgopacity"
-        min="0"
-        max="1"
-        step="0.1"
-      >
+      <input type="number" class="input-field" @change="handleBgOpacityChange" placeholder="请输入透明度(0-1)"
+        v-model="bgopacity" min="0" max="1" step="0.1">
     </div>
     <div class="input-group">
       <label class="input-label">Opacity</label>
-      <input
-        type="number"
-        class="input-field"
-        @change="handleOpacityChange"
-        placeholder="请输入透明度(0-1)" 
-        v-model="opacity"
-        min="0"
-        max="1"
-        step="0.1"
-      >
+      <input type="number" class="input-field" @change="handleOpacityChange" placeholder="请输入透明度(0-1)" v-model="opacity"
+        min="0" max="1" step="0.1">
+    </div>
+    <div class="input-group">
+      <label class="input-label">Shortcut</label>
+      <input type="text" class="input-field" @keydown="handleShortcutChange" placeholder="按下快捷键组合" v-model="shortcut"
+        readonly>
     </div>
   </div>
 </template>
@@ -40,6 +29,8 @@
 <script>
 import DB from "@/utils/db";
 import { ipcRenderer } from "electron";
+import { debounce } from 'lodash';
+
 export default {
   data() {
     return {
@@ -47,26 +38,51 @@ export default {
       subtitle: "",
       opacity: 1,
       bgopacity: 1,
+      shortcut: "",
+      debouncedSetShortcut: null
     };
   },
   methods: {
     getDefault() {
       this.title = DB.get("title").title;
       this.subtitle = DB.get("title").subtitle;
-      this.bgopacity = DB.get("setting").bgopacity
-      this.opacity = DB.get("setting").opacity
+      this.bgopacity = DB.get("setting").bgopacity;
+      this.opacity = DB.get("setting").opacity;
+      this.shortcut = DB.get("setting").shortcut || "";
     },
     updateDB(key, value) {
       this.$emit('update-title', key, value);
       DB.set("title", { ...DB.get("title"), [key]: value });
     },
     validateOpacity(value) {
-      // 确保值在0-1之间
       const num = parseFloat(value);
       if (isNaN(num)) return false;
       return num >= 0.1 && num <= 1;
     },
-    
+    handleShortcutChange(e) {
+      e.preventDefault();
+      const keys = [];
+      if (e.ctrlKey) keys.push('Ctrl');
+      if (e.shiftKey) keys.push('Shift');
+      if (e.altKey) keys.push('Alt');
+      if (e.metaKey) keys.push('Meta');
+
+      // 排除修饰键本身
+      if (!['Control', 'Shift', 'Alt', 'Meta'].includes(e.key)) {
+        keys.push(e.key.toUpperCase());
+      }
+
+      // 必须包含至少一个修饰键和一个普通键
+      if (keys.length >= 2) {
+        this.shortcut = keys.join('+');
+        this.debouncedSetShortcut();
+      }
+    },
+    async setShortcut() {
+      if (!this.shortcut) return;
+      DB.set("setting", { ...DB.get("setting"), shortcut: this.shortcut });
+      await ipcRenderer.invoke("set-shortcut", this.shortcut);
+    },
     async handleBgOpacityChange() {
       if (!this.validateOpacity(this.bgopacity)) {
         this.bgopacity = 1;
@@ -85,6 +101,7 @@ export default {
     }
   },
   created() {
+    this.debouncedSetShortcut = debounce(this.setShortcut, 500);
     ipcRenderer.invoke("getDataPath").then((storePath) => {
       DB.initDB(storePath);
       this.getDefault();
@@ -102,14 +119,14 @@ export default {
 </script>
 <style scoped>
 .container {
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 12px;
-    max-width: 300px;
-    /* margin: 16px auto; */
-    padding: 16px;
-    color: black;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 300px;
+  /* margin: 16px auto; */
+  padding: 16px;
+  color: black;
 }
 
 .input-group {
@@ -122,7 +139,8 @@ export default {
 .input-label {
   font-size: 14px;
   color: #fdfdfd;
-  width: 50px; /* 固定label宽度，使输入框对齐 */
+  width: 50px;
+  /* 固定label宽度，使输入框对齐 */
   text-align: left;
 }
 
