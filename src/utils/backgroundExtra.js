@@ -63,7 +63,7 @@ export function createTray(showWindow) {
         dialog.showMessageBox({
           title: pkg.name,
           message: pkg.description,
-          detail: `Version: ${pkg.version}\nAuthor: ${pkg.author}\nGithub: https://github.com/xiajingren/xhznl-todo-list`
+          detail: `Version: ${pkg.version}\nAuthor: ${pkg.author}\nGithub: https://github.com/Finn-sky/todo-list`
         });
       }
     },

@@ -1,8 +1,8 @@
 {
-  "name": "xhznl-todo-list",
-  "version": "0.2.6",
+  "name": "todo-list",
+  "version": "0.3.0",
   "private": true,
-  "author": "xhznl",
+  "author": "Finn-sky",
   "description": "a todo list application",
   "scripts": {
     "serve": "vue-cli-service serve",

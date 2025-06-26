@@ -49,7 +49,7 @@ const DB = {
         {
           todo_date: getNowDate(),
           todo_datetime: getNowDateTime(),
-          content: "【重要】给项目点一个star",
+          content: "【重要】下班请自己喝杯奶茶!",
         },
       ],
       doneList: [
